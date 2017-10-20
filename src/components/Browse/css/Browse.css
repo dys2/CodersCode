@@ -1,0 +1,8 @@
+.browse-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.browse-grid {
+  width: 50vw;
+}

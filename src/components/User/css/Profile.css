@@ -1,0 +1,27 @@
+.profile-avatar {
+  height: 200px !important;
+  width: 200px !important;
+  margin: auto;
+  border: solid 2px black;
+}
+
+.posts-list {
+  margin: auto;
+  width: 300px;
+}
+
+.delete-icon:hover {
+  color: red !important;
+}
+
+.posts-text-prof {
+  margin-right: 20px;
+}
+
+.user-post-title {
+  margin-left: 2px;
+}
+
+.prof-post-title {
+  margin-right: 4px;
+}

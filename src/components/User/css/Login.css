@@ -1,0 +1,21 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: space-around;
+  padding: 10px 50px;
+}
+
+.log-in-progress {
+  display: block;
+  position: absolute;
+  left: 47.5%;
+}
+
+.hide {
+  display: none;
+}
+
+.log-in-btn {
+  color: #FAFAFA !important;
+}

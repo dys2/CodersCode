@@ -1,0 +1,48 @@
+.sign-up-btn {
+  color: #7B1FA2 !important;
+  background-color: #FAFAFA !important;
+}
+
+.create-account-title {
+  text-align: center;
+}
+
+.create-account-inputs {
+  margin: 10px 50px !important;
+}
+
+.hidden-input {
+  display: none;
+}
+
+ .upload-label {
+  margin: auto !important;
+  padding: 0 !important;
+  width: 100px;
+} 
+.upload-label:hover {
+  cursor: default;
+}
+.add-photo-icon {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.add-photo-icon:hover {
+  cursor: pointer;
+} 
+
+.create-account-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-prev {
+  margin: 0 auto;
+  width: auto;
+  max-width: 200px;
+  height: auto;
+  max-height: 200px;
+  overflow: hidden;
+}

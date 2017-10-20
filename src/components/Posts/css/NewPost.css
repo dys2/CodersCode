@@ -1,0 +1,35 @@
+.new-post-form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+.field-new-post-form {
+ background-color: white;
+}
+.MuiInput-underline-125::before {
+  background-color: white !important;
+}
+.content-new-post-form {
+  width: 100%;
+  background-color: white !important;
+} 
+.MuiInput-inputSingleline-366 {
+  display: none;
+}
+.MuiInput-inkbar-119:after {
+  display: none;
+}
+
+.upload-label-post {
+  margin: 50px 15vw;
+}
+
+.chip-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-post-submit {
+  margin-top: 20px;
+
+}

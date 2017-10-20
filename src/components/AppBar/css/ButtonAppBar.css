@@ -1,0 +1,30 @@
+.app-bar {
+  margin: 0;
+  background-color: white !important;
+  color: #9E9E9E !important;
+}
+
+.tool-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #9E9E9E;
+  text-shadow: -2px -1px 2px black;
+}
+
+.app-bar-icon {
+  color: #9E9E9E !important;
+}
+
+.appbar-right-img {
+  max-height: 50px;
+  height: 8vw;
+  align-self: flex-end;
+}
+
+.appbar-div-mid {
+  padding-top: 4px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}

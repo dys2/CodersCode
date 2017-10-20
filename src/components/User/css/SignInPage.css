@@ -1,0 +1,24 @@
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: space-around;
+  padding: 10px 50px;
+  width: 40vw;
+  max-width: 300px;
+  margin: auto;
+  border: 2px outset whitesmoke;
+}
+
+.signin-inputs {
+  width: 15vw;
+  margin: 0 auto !important;
+}
+
+.signin-inputs:focus-within {
+  width: 20vw;
+}
+.signin-btn {
+  max-width: 60px;
+  margin: auto;
+}

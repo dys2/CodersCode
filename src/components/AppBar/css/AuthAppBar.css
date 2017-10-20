@@ -1,0 +1,16 @@
+.auth-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.arrow-dd-btn {
+  color: #9E9E9E!important;
+  padding: 0 !important;
+  min-width: 20px !important;
+}
+
+.menu-avatar {
+  height: 50px !important;
+  width: 50px !important;
+  margin: 10px 5px !important;
+}

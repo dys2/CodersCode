@@ -1,0 +1,56 @@
+.likes-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.thumb-up-comment {
+  align-self: flex-end !important;
+}
+.thumb-up-comment:hover {
+  color: purple;
+}
+.comment-container {
+  border-top: 1px whitesmoke solid;
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+  padding-top: 20px;
+}
+.comment-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+
+.comment {
+  padding-left: 10px;
+}
+.comment-author {
+  margin-right: 20px !important;
+  font-weight: 600 !important;
+}
+.comment-icons {
+  display: flex;
+  flex-direction: row;
+}
+.comment-form {
+  margin-left: 14px;
+  margin-right: 14px;
+  margin-top: 20px;
+  width: 30vw;
+}
+.comment-text {
+  display: flex !important;
+  flex-direction: row;
+  width: auto;
+  flex-direction: row;
+}
+.comment-content {
+  padding-bottom: 0 !important;
+}
+
+.comment-input {
+  font-size: 12px;
+}
