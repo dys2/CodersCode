@@ -8,7 +8,7 @@ export const BROWSE = "BROWSE";
 
 export const createPost = (post) => async (dispatch) => {
   try {
-    const res = await axios.post('https://coders-api.herokuapp.com//post', post, { headers: { 'authorization': localStorage.getItem('token') }});
+    const res = await axios.post('https://coders-api.herokuapp.com/post', post, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch({
       type: NEW_POST,
       newPostId: res.data.id
