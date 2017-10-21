@@ -119,7 +119,7 @@ export const topPosts = () => async (dispatch) => {
 
 export const likeComment = (postId, commentId, userId) => async (dispatch) => {
   try {
-    const res = await axios.post('http://localhost:8080/comment/like', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
+    const res = await axios.post('https://coders-api.herokuapp.com/comment/like', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch(getPosts());
   } catch(err) {
     console.log(err);
@@ -128,7 +128,7 @@ export const likeComment = (postId, commentId, userId) => async (dispatch) => {
 
 export const removeLikeComment = (postId, commentId, userId) => async (dispatch) => {
   try {
-    const res = await axios.post('http://localhost:8080/comment/removeLike', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
+    const res = await axios.post('https://coders-api.herokuapp.com/comment/removeLike', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch(getPosts());
   } catch(err) {
     console.log(err);
@@ -137,7 +137,7 @@ export const removeLikeComment = (postId, commentId, userId) => async (dispatch)
 
 export const deleteComment = (id) => async (dispatch) => {
   try {
-    const res = await axios.delete(`http://localhost:8080/comment/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
+    const res = await axios.delete(`https://coders-api.herokuapp.com/comment/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch(getPosts());
   } catch(err) {
     console.log(err);
