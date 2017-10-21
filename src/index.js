@@ -13,7 +13,7 @@ import App from './components/App';
 const store = applyMiddleware(thunk)(createStore);
 
 ReactDOM.render(
-  <Provider store={store(reducers, window.__REDUX_DEVTOOLS_EXTENSION__())}>
+  <Provider store={store(reducers)}>
     <Router>
       <MuiThemeProvider>
         <App />
