@@ -17,7 +17,7 @@ export const loginUser = (creds) => async (dispatch) => {
   const { username, password } = creds;
   dispatch(requestLogin({ username, password }));
   try {
-    const res = await axios.post('http://localhost:8080/login', { username, password });
+    const res = await axios.post('https://coders-api.herokuapp.com/login', { username, password });
     localStorage.setItem('token', res.data.token);
     dispatch(receiveLogin(res.data.user));
   } catch(err) {
@@ -27,7 +27,7 @@ export const loginUser = (creds) => async (dispatch) => {
 
 export const authUser = (token) => async (dispatch) => {
   try {
-    const res = await axios.get('http://localhost:8080/auth', { headers: { 'authorization': token }});
+    const res = await axios.get('https://coders-api.herokuapp.com/auth', { headers: { 'authorization': token }});
     dispatch(receiveLogin(res.data.user));
   } catch(err) {
     dispatch(loginError(err));
@@ -37,7 +37,7 @@ export const authUser = (token) => async (dispatch) => {
 export const checkPassword = (creds) => async (dispatch) => {
   const { username, password } = creds;
   try {
-    const res = await axios.post('http://localhost:8080/login', { username, password });
+    const res = await axios.post('https://coders-api.herokuapp.com/login', { username, password });
     if (res.status === 200) dispatch({ type: CHECK_PASSWORD, confirmed: true });
   } catch (err) {
     dispatch({ type: CHECK_PASSWORD, confirmed: false });
@@ -103,7 +103,7 @@ const logoutError = (message) => {
 export const userSignup = user => async (dispatch) => {
   try {
     dispatch(requestSignup(user));
-    const res = await axios.post('http://localhost:8080/register', user);
+    const res = await axios.post('https://coders-api.herokuapp.com/register', user);
     localStorage.setItem('token', res.data.token);
     dispatch(receiveSignup(res.data.user));
   } catch(err) {
@@ -141,7 +141,7 @@ const signupError = (message) => {
 
 export const userUpdate = updates => async (dispatch) => {
   try {
-    const res = await axios.put('http://localhost:8080/register', updates, { headers: { 'authorization': localStorage.getItem('token') }});
+    const res = await axios.put('https://coders-api.herokuapp.com/register', updates, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch({
       type: UPDATE_USER,
       user: res.data
