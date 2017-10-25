@@ -38,10 +38,14 @@ class Account extends Component {
   updateImage(e) {
     e.preventDefault();
     const file = e.target.files[0];
+    if (file.size >= 14000000) {
+      this.setState({ snack: true, message: "image must be under 14mb!"});
+      return setTimeout(() => this.setState({ snack: false, message: '' }), 2000);
+    }
     var reader = new FileReader();
-    reader.onload = (upload) => {
-      this.props.userUpdate({ picture: upload.target.result });
-      window.location.reload()
+    reader.onload = async (upload) => {
+      await this.props.userUpdate({ picture: upload.target.result });
+      window.location.reload();
     };
     reader.readAsDataURL(file);
   }
@@ -74,6 +78,7 @@ class Account extends Component {
   }
 
   render() {
+    console.log(this.props.auth.user);
     return (
       <div className="account-container">
       <Avatar

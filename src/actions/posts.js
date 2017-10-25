@@ -5,6 +5,8 @@ export const NEW_POST = "NEW_POST";
 export const GET_POSTS = "GET_POSTS";
 export const GET_POST = "GET_POST";
 export const BROWSE = "BROWSE";
+export const POST_ERROR = "POST_ERROR";
+export const CLEAR_POST_ERROR = "CLEAR_POST_ERROR";
 
 export const createPost = (post) => async (dispatch) => {
   try {
@@ -14,7 +16,8 @@ export const createPost = (post) => async (dispatch) => {
       newPostId: res.data.id
     });
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in first')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -26,7 +29,8 @@ export const getPosts = () => async (dispatch) => {
       posts: res.data.posts
     });
   } catch(err) {
-    console.log(err);
+    dispatch(postError('Could not retrieve posts!'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -37,7 +41,8 @@ export const searchPosts = (posts) => (dispatch) => {
       posts
     });
   } catch(err) {
-    console.log(err);
+    dispatch(postError('Could not find posts'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -49,19 +54,21 @@ export const getUsersPosts = (author) => async (dispatch) => {
       posts: res.data.posts
     });
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in before completing action')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
 export const getPost = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`https://coders-api.herokuapp.com/post/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
+    const res = await axios.get(`https://coders-api.herokuapp.com/post/${id}`);
     dispatch({
       type: GET_POST,
       post: res.data.post
     })
   } catch(err) {
-    console.log(err);
+    dispatch(postError('Could not retrieve post!'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -71,7 +78,8 @@ export const addComment = (commentData) => async (dispatch) => {
     await axios.put(`https://coders-api.herokuapp.com/comment/${id}`, { text, author }, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch(getPosts());
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in before completing action')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -82,7 +90,8 @@ export const addPostLike = (data) => async (dispatch) => {
     dispatch(getPosts());
     dispatch({ type: UPDATE_USER, user: res.data });
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in before completing action')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -93,7 +102,8 @@ export const removePostLike = (data) => async (dispatch) => {
     dispatch(getPosts());
     dispatch({ type: UPDATE_USER, user: res.data });
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in before completing action')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -102,7 +112,8 @@ export const deletePost = (id) => async (dispatch) => {
     const res = await axios.delete(`https://coders-api.herokuapp.com/post/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
     if (res.status === 200) dispatch(getUsersPosts());
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in before completing action')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
@@ -113,33 +124,44 @@ export const topPosts = () => async (dispatch) => {
     const users = await axios.get(`https://coders-api.herokuapp.com/browse/users`);
     dispatch({ type: BROWSE, top: top.data, tags: tags.data, users: users.data });
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in first')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
 export const likeComment = (postId, commentId, userId) => async (dispatch) => {
   try {
-    const res = await axios.post('https://coders-api.herokuapp.com/comment/like', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
+    await axios.post('https://coders-api.herokuapp.com/comment/like', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch(getPosts());
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in first')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
 export const removeLikeComment = (postId, commentId, userId) => async (dispatch) => {
   try {
-    const res = await axios.post('https://coders-api.herokuapp.com/comment/removeLike', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
+    await axios.post('https://coders-api.herokuapp.com/comment/removeLike', { postId, commentId, userId }, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch(getPosts());
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in first')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
   }
 }
 
 export const deleteComment = (id) => async (dispatch) => {
   try {
-    const res = await axios.delete(`https://coders-api.herokuapp.com/comment/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
+    await axios.delete(`https://coders-api.herokuapp.com/comment/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
     dispatch(getPosts());
   } catch(err) {
-    console.log(err);
+    err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in first')) : dispatch(postError('Could not complete action'));
+    setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);
+  }
+}
+
+const postError = (error) => {
+  return {
+    type: POST_ERROR,
+    error
   }
 }

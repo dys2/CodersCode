@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+const FB = window.FB
+
+
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
@@ -12,6 +16,7 @@ export const AUTH_USER = "AUTH_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const CHECK_PASSWORD = "CHECK_PASSWORD";
 export const RESET_TRYS = "RESET_TRYS";
+export const CLEAR_AUTH_ERROR = "CLEAR_AUTH_ERROR";
 
 export const loginUser = (creds) => async (dispatch) => {
   const { username, password } = creds;
@@ -21,16 +26,20 @@ export const loginUser = (creds) => async (dispatch) => {
     localStorage.setItem('token', res.data.token);
     dispatch(receiveLogin(res.data.user));
   } catch(err) {
-    dispatch(loginError(err));
+    dispatch(loginError("Username/Password combo is incorrect!"));
+    setTimeout(() => dispatch({ type: CLEAR_AUTH_ERROR }), 2000);
   }
 }
 
 export const authUser = (token) => async (dispatch) => {
   try {
-    const res = await axios.get('https://coders-api.herokuapp.com/auth', { headers: { 'authorization': token }});
+    const fb = await FB.getLoginStatus(response =>  response);
+    let res;
+    fb.status === 'connected'  ? 
+      res = await axios.get('https://coders-api.herokuapp.com/auth', { headers: { 'authorization': fb.authResponse.accessToken }}):
+      res = await axios.get('https://coders-api.herokuapp.com/auth', { headers: { 'authorization': token }});
     dispatch(receiveLogin(res.data.user));
   } catch(err) {
-    dispatch(loginError(err));
   }
 }
 
@@ -42,6 +51,12 @@ export const checkPassword = (creds) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: CHECK_PASSWORD, confirmed: false });
     setTimeout(() => dispatch({ type: RESET_TRYS }), 300000);
+  }
+}
+
+const clearAuthError = () => {
+  return {
+    type: CLEAR_AUTH_ERROR
   }
 }
 
@@ -68,7 +83,7 @@ const loginError = (message) => {
     type: LOGIN_FAILURE,
     isFetching: false,
     isAuth: false,
-    message
+    error: message
   }
 };
 
@@ -78,7 +93,8 @@ export const logoutUser = () => async (dispatch) => {
     localStorage.removeItem('token');
     dispatch(receiveLogout());
   } catch(err) {
-    dispatch(logoutError(err));
+    dispatch(logoutError("Could not logout!"));
+    setTimeout(() => dispatch({ type: CLEAR_AUTH_ERROR }), 2000);
   }
 }
 
@@ -96,7 +112,7 @@ const logoutError = (message) => {
     type: LOGOUT_FAILURE,
     isFetching: true,
     isAuth: true,
-    message
+    error: message
   }
 };
 
@@ -107,7 +123,8 @@ export const userSignup = user => async (dispatch) => {
     localStorage.setItem('token', res.data.token);
     dispatch(receiveSignup(res.data.user));
   } catch(err) {
-    dispatch(signupError(err));
+    dispatch(signupError("User already exists try a different email or username!"));
+    setTimeout(() => dispatch({ type: CLEAR_AUTH_ERROR }), 2000);
   }
 };
 
@@ -135,7 +152,7 @@ const signupError = (message) => {
     type: SIGNUP_FAILURE,
     isFetching: false,
     isAuth: false,
-    message
+    error: message
   }
 }
 
@@ -147,6 +164,7 @@ export const userUpdate = updates => async (dispatch) => {
       user: res.data
     });
   } catch(err) {
-    dispatch(signupError(err));
+    dispatch(signupError("Could not update user, username/email may already exist!"));
+    setTimeout(() => dispatch({ type: CLEAR_AUTH_ERROR }), 2000);
   }
 };

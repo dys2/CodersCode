@@ -18,6 +18,7 @@ class Comment extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLike = this.handleLike.bind(this);
     this.handleLikeRemove = this.handleLikeRemove.bind(this);
+    this.share = this.share.bind(this);
   }
     componentDidMount() {
       if (this.props.more) this.setState({num: undefined});
@@ -38,6 +39,13 @@ class Comment extends Component {
   handleLikeRemove() {
     this.props.removePostLike({postId: this.props.id, authorId: this.props.auth.user._id});
   }
+  share(id) {
+    window.FB.ui({
+      method: 'share',
+      quote: this.props.post.content,
+      href: `https://coderscode.herokuapp.com/posts/${id}`,
+    }, function(response){});
+  }
   render() {
     return (
       <div className="comment-content">
@@ -50,6 +58,7 @@ class Comment extends Component {
           />
         </IconButton>
         <Typography>{this.props.likes.length}</Typography>
+        <button className="share-btn" onClick={() => this.share(this.props.id)}><img className="fb-logo-white" src={'./images/FB-f-Logo__white_29.png'}/><img className="fb-logo-blue" src={'./images/FB-f-Logo__blue_29.png'}/><Typography className="share-text" type='caption'>share</Typography></button>
         </div>
         <ul className="comment-container">
           {this.props.comments.sort((a, b) => b.likes.length - a.likes.length).slice(0, this.state.num).map((comment) => {

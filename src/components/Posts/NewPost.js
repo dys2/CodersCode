@@ -6,6 +6,7 @@ import AddAPhoto from 'material-ui-icons/AddAPhoto';
 import Chip from 'material-ui/Chip';
 import Typography from 'material-ui/Typography';
 import Card, { CardHeader, CardMedia, CardContent } from 'material-ui/Card';
+import Snackbar from 'material-ui/Snackbar';
 import './css/NewPost.css';
 
 export default class NewPost extends Component {
@@ -13,6 +14,7 @@ export default class NewPost extends Component {
     super();
     this.state = {
       open: false,
+      error: '',
       chipArray: [],
       content: 'This is where your content goes',
       title: 'Title',
@@ -55,6 +57,7 @@ export default class NewPost extends Component {
 
   handleImage(e) {
     const file = e.target.files[0];
+    if (file.size >= 14000000) return this.setState({ error: "image must be under 14mb"});
     var reader = new FileReader();
     reader.onload = (upload) => {
       this.setState({ picture: upload.target.result });
@@ -102,6 +105,34 @@ export default class NewPost extends Component {
         </Card>
         </div>
         </form>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          open={this.props.posts.error.length > 0}
+          autoHideDuration={2000}
+          onRequestClose={() => console.log}
+          SnackbarContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.props.posts.error}</span>}
+          className="snack"
+          />
+          <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          open={this.state.error.length > 0}
+          autoHideDuration={2000}
+          onRequestClose={() => this.setState({error: ''})}
+          SnackbarContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.state.error}</span>}
+          className="snack"
+          />
       </div>
     )
   }

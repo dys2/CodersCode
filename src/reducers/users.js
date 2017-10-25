@@ -2,7 +2,8 @@ import { FIND_USER } from '../actions/user';
 
 const initialState = {
   user: { username: null, email: null, picture: null, liked: [], _id: null },
-  users: []
+  users: [],
+  error: ''
 }
 export default (state = initialState, action) => {
   switch(action.type) {

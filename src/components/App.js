@@ -18,12 +18,12 @@ export default () => (
   <div className="app">
     <Route path="/" component={ButtonAppBar} />
     <Route exact path='/posts/tags/:tag' component={PostsByTags} />
-    <Route path='/browse' component={Browse} />
+    <Route path='/browse' component={Auth(Browse, SignInPage)} />
     <Route path='/newpost' component={Auth(NewPost, SignInPage)} />
     <Route exact path='/posts' component={Posts} />
     <Route exact path='/posts/:id' component={IndPost} />
-    <Route path='/profile' component={Profile} />
+    <Route path='/profile' component={Auth(Profile, SignInPage)} />
     <Route path='/account' component={Auth(Account, SignInPage)} />
-    <Route path='/user/:id' component={User} />
+    <Route path='/user/:id' component={Auth(User, SignInPage)} />
   </div>
 )

@@ -39,8 +39,7 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <Button 
-          
+        <Button
           aria-owns={this.state.open ? 'simple-menu' : null}
           aria-haspopup="true"
           onClick={this.handleOpen}

@@ -30,7 +30,7 @@ export default class Post extends Component {
           <Typography component="p" className="post-para">
             {this.props.post.content}
           </Typography>
-          <Comment id={this.props.post._id} likes={this.props.post.likes} comments={this.props.post.comments}/>
+          <Comment id={this.props.post._id} post={this.props.post} likes={this.props.post.likes} comments={this.props.post.comments}/>
         </CardContent>
       </Card>
     )

@@ -3,7 +3,9 @@ import {
   GET_POSTS,
   NEW_POST,
   GET_POST,
-  BROWSE
+  BROWSE,
+  POST_ERROR,
+  CLEAR_POST_ERROR
 } from '../actions/posts';
 import authReducer from './auth';
 import userReducer from './users';
@@ -15,6 +17,7 @@ const initialState = {
   tags: [],
   users: [],
   post: { author: { username: null }, tags: [], likes: [], comments: []},
+  error: '',
   newPostId: null,
 };
 
@@ -42,6 +45,16 @@ const postReducer = (state = initialState, action) => {
         top: action.top,
         tags: action.tags,
         users: action.users
+      }
+    case POST_ERROR:
+      return {
+        ...state,
+        error: action.error
+      }
+    case CLEAR_POST_ERROR:
+      return {
+        ...state,
+        error: ''
       }
     default:
       return state;

@@ -13,7 +13,8 @@ export default class CreateAccount extends Component {
     this.state= {
       open: false,
       noMatch: false,
-      picture: ''
+      picture: '',
+      error: ''
     }
     this.handleOpen = this.handleOpen.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -48,6 +49,7 @@ export default class CreateAccount extends Component {
   
   handleImage(e) {
     const file = e.target.files[0];
+    if (file.size >= 14000000) return this.setState({ error: "image must be under 14mb!"})
     var reader = new FileReader();
     reader.onload = (upload) => {
       this.preview.src = upload.target.result;

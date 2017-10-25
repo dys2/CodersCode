@@ -8,6 +8,7 @@ import Typography from 'material-ui/Typography';
 import Card, { CardHeader, CardMedia, CardContent } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import Snackbar from 'material-ui/Snackbar';
 
 import './css/IndPost.css';
 
@@ -47,7 +48,21 @@ class IndPost extends Component {
                 })} 
               </div>
               </CardContent >
-          </Card> 
+          </Card>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          open={this.props.posts.error.length > 0}
+          autoHideDuration={2000}
+          onRequestClose={() => console.log}
+          SnackbarContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{this.props.posts.error}</span>}
+          className="snack"
+          />
       </div>
     ) :  null;
   }

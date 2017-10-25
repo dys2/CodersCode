@@ -5,9 +5,11 @@ import {
   LOGOUT_SUCCESS,
   SIGNUP_SUCCESS,
   SIGNUP_REQUEST,
+  SIGNUP_FAILURE,
   UPDATE_USER,
   CHECK_PASSWORD,
-  RESET_TRYS
+  RESET_TRYS,
+  CLEAR_AUTH_ERROR
 } from '../actions/auth';
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
   isAuth: localStorage.getItem('token') ? true : false,
   confirmed: false,
   trys: 0,
+  error: '',
   user: { username: null, email: null, picture: null, liked: [], _id: null }
 };
 
@@ -31,7 +34,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         isAuth: true,
-        user: action.user
+        user: action.user,
       };
     case LOGIN_FAILURE:
       return {
@@ -39,12 +42,13 @@ const authReducer = (state = initialState, action) => {
         trys: ++state.trys,
         isFetching: false,
         isAuth: false,
+        error: action.error,
       };
     case CHECK_PASSWORD: {
       return {
         ...state,
         trys: ++state.trys,
-        confirmed: action.confirmed
+        confirmed: action.confirmed,
       }
     };
     case RESET_TRYS: {
@@ -71,7 +75,14 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         isAuth: true,
-        user: action.user
+        user: action.user,
+      };
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isAuth: false,
+        error: action.error
       };
     case UPDATE_USER:
       return {
@@ -79,6 +90,11 @@ const authReducer = (state = initialState, action) => {
         isFetching: false,
         isAuth: true,
         user: action.user
+      }
+    case CLEAR_AUTH_ERROR:
+      return {
+        ...state,
+        error: ''
       }
     default:
       return state;
