@@ -77,7 +77,7 @@ export default class NewPost extends Component {
           subheader={this.props.auth.user.username}/>
           {this.state.picture ? 
             (<CardMedia className="post-image" title="image" ref={node => this.image = node} image={this.state.picture} />) :
-            (<div><input accept="image/*" id="file" type="file" onChange={this.handleImage} name="photo" className="hidden-input"/>
+            (<div className="upload-btn-div"><input accept="image/*" id="file" type="file" onChange={this.handleImage} name="photo" className="hidden-input"/>
           <Button className="upload-label-post">
             <label htmlFor="file" className="upload-label-post">
               <AddAPhoto className="add-photo-icon"/>
@@ -87,21 +87,25 @@ export default class NewPost extends Component {
           <Typography component="p">
             <TextField required className="content-new-post-form" rows={12} name="content" onChange={this.handleContent} multiline placeholder="Content" />
           </Typography>
-            <Typography component="p">
-              <TextField className="field-new-post-form" name="tags" onChange={this.handleTags} placeholder="Tags"/>
+          <div className="tag-row">
+            <Typography component="p" className ="new-post-tags">
+              <TextField className="field-new-post-form" name="tags" onChange={this.handleTags} placeholder="Tags (seperate with ' , ')"/>
             </Typography>
-            <button type="submit" className="new-post-submit">Submit Post</button>
-        </CardContent>
-        <div className="chip-div">
+             <div className="chip-div">
             {this.state.chipArray.map(data => {
             return (
               <Chip
+                className="tag-chip"
                 label={data.label}
                 key={data.key}
               />
             );
             })}
           </div>
+          </div>
+            <Button type="submit" raised className="new-post-submit">Submit Post</Button>
+        </CardContent>
+       
         </Card>
         </div>
         </form>

@@ -44,19 +44,17 @@ const authReducer = (state = initialState, action) => {
         isAuth: false,
         error: action.error,
       };
-    case CHECK_PASSWORD: {
+    case CHECK_PASSWORD:
       return {
         ...state,
         trys: ++state.trys,
         confirmed: action.confirmed,
-      }
-    };
-    case RESET_TRYS: {
+      };
+    case RESET_TRYS:
       return {
         ...state,
         trys: 0
-      }
-    }
+      };
     case LOGOUT_SUCCESS:
       return {
         ...state,

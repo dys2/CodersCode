@@ -10,6 +10,7 @@ class PostsByTags extends Component {
     const tag = this.props.match.params.tag.trim();
     const posts = this.props.posts.posts.filter((post) => {
       if (post.tags.map(t => t.label.trim()).includes(tag)) return post;
+      return null;
     });
     this.props.searchPosts(posts);
   }

@@ -5,7 +5,6 @@ import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ThumbUp from 'material-ui-icons/ThumbUp';
 import Favorite from 'material-ui-icons/Favorite';
-import { CardContent } from 'material-ui/Card'
 import { connect } from 'react-redux';
 import { addComment, addPostLike, removePostLike, likeComment, removeLikeComment, deleteComment } from '../../actions/posts';
 import './css/Comment.css';
@@ -58,7 +57,11 @@ class Comment extends Component {
           />
         </IconButton>
         <Typography>{this.props.likes.length}</Typography>
-        <button className="share-btn" onClick={() => this.share(this.props.id)}><img className="fb-logo-white" src={'./images/FB-f-Logo__white_29.png'}/><img className="fb-logo-blue" src={'./images/FB-f-Logo__blue_29.png'}/><Typography className="share-text" type='caption'>share</Typography></button>
+        <button className="share-btn" onClick={() => this.share(this.props.id)}>
+          <img className="fb-logo-white" alt="white facebook logo" src={require('./css/images/FB-f-Logo__white_29.png')}/>
+          <img className="fb-logo-blue" alt="blue facebook logo" src={require('./css/images/FB-f-Logo__blue_29.png')}/>
+          <Typography className="share-text" type='caption'>share</Typography>
+        </button>
         </div>
         <ul className="comment-container">
           {this.props.comments.sort((a, b) => b.likes.length - a.likes.length).slice(0, this.state.num).map((comment) => {

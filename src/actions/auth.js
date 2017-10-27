@@ -1,9 +1,5 @@
 import axios from 'axios';
 
-const FB = window.FB
-
-
-
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
@@ -33,13 +29,10 @@ export const loginUser = (creds) => async (dispatch) => {
 
 export const authUser = (token) => async (dispatch) => {
   try {
-    const fb = await FB.getLoginStatus(response =>  response);
-    let res;
-    fb.status === 'connected'  ? 
-      res = await axios.get('https://coders-api.herokuapp.com/auth', { headers: { 'authorization': fb.authResponse.accessToken }}):
-      res = await axios.get('https://coders-api.herokuapp.com/auth', { headers: { 'authorization': token }});
+    const res = await axios.get('https://coders-api.herokuapp.com/auth', { headers: { 'authorization': token }});
     dispatch(receiveLogin(res.data.user));
   } catch(err) {
+    dispatch(loginError(""));
   }
 }
 
@@ -51,12 +44,6 @@ export const checkPassword = (creds) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: CHECK_PASSWORD, confirmed: false });
     setTimeout(() => dispatch({ type: RESET_TRYS }), 300000);
-  }
-}
-
-const clearAuthError = () => {
-  return {
-    type: CLEAR_AUTH_ERROR
   }
 }
 

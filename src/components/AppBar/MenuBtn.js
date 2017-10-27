@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findDOMNode } from 'react-dom';
 import { searchPosts, getPosts } from '../../actions/posts';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
@@ -41,12 +40,13 @@ class MenuBtn extends Component {
     if (this.props.history.location.pathname !== '/posts') this.props.history.push('/posts');
     const search = this.input.value.toLowerCase().split(' ');
     const posts = this.props.posts.posts.filter((post) => {
-      if (post.author.username.toLowerCase().includes(...search)) return post;
-      if (post.title.toLowerCase().includes(...search)) return post;
-      if (post.content.toLowerCase().includes(...search)) return post;
-      if (post.tags.includes(...search)) return post;
-      if (post.comments.filter(c => c.text.toLowerCase().includes(...search)).length > 0) return post;
-      if (post.comments.filter(c => c.author.username.toLowerCase().includes(...search)).length > 0) return post;
+      if (post.author.username.toLowerCase().includes(...search)) return true;
+      if (post.title.toLowerCase().includes(...search)) return true;
+      if (post.content.toLowerCase().includes(...search)) return true;
+      if (post.tags.includes(...search)) return true;
+      if (post.comments.filter(c => c.text.toLowerCase().includes(...search)).length > 0) return true;
+      if (post.comments.filter(c => c.author.username.toLowerCase().includes(...search)).length > 0) return true;
+      return false;
     });
     this.props.searchPosts(posts);
   }

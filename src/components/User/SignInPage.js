@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import { CircularProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
+import Button from 'material-ui/Button';
+import Typography from 'material-ui/Typography';
 import './css/SignInPage.css';
 
 
@@ -18,29 +20,6 @@ export default class SignInPage extends Component {
     password = password.value;
     this.props.loginUser({ username, password });
   }
-  // async handleFB(e) {
-  //   try {
-  //     const user = {};
-  //     await FB.login(async (res) => {
-  //       console.log(res);
-  //       const id = await res.authResponse.userID;
-  //       const token = await res.authResponse.accessToken;
-  //       console.log(token);
-  //       await FB.api(`/${id}/picture`, (response) => {
-  //         user['picture'] = response.data.url;
-  //       });
-
-  //     }, {
-  //       scope: 'email,user_photos,public_profile',
-  //     });
-  //     console.log(user);
-  //     // FB.api(`/${id}`, (res) => {
-  //     //   console.log(res);
-  //     // })
-  //   } catch(err) {
-  //     console.log(err);
-  //   }
-  // }
 
   render() {
     return (
@@ -60,10 +39,11 @@ export default class SignInPage extends Component {
               name="password"
               className="signin-inputs"
             />
-            <button type="submit" className="signin-btn">Log-in</button>
             <div className={this.props.auth.isFetching ? "log-in-progress" : "hide"}>
               <CircularProgress  size={30} />
             </div>
+            <Button raised type="submit" color="white" className="signin-btn">Log-in</Button>
+            
           </form>
         <Snackbar
           anchorOrigin={{

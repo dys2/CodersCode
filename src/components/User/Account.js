@@ -59,7 +59,7 @@ class Account extends Component {
     if (e.target.password.value !== e.target.confirmPassword.value) return this.handleSnack('Passwords must match!!');
     if (e.target.username.value !== this.props.auth.user.username) update['username'] = e.target.username.value;
     if (e.target.email.value !== this.props.auth.user.email) update['email'] = e.target.email.value;
-    if (e.target.password.value != "") update['password'] = e.target.password.value;
+    if (e.target.password.value !== "") update['password'] = e.target.password.value;
     if (e.target.password.value.length >= 1 && e.target.password.value.length < 5) return this.handleSnack('Password must be longer than 5 characters!!');
     this.props.userUpdate(update);
     window.location.reload()
@@ -78,7 +78,6 @@ class Account extends Component {
   }
 
   render() {
-    console.log(this.props.auth.user);
     return (
       <div className="account-container">
       <Avatar
@@ -182,7 +181,7 @@ class Account extends Component {
           className="snack"
           />
      </div>
-)
+    )
   }
 
 }

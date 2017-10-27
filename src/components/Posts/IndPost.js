@@ -35,8 +35,7 @@ class IndPost extends Component {
                 <Typography component="p" className="post-para">
                   {this.props.posts.post.content}
                 </Typography>
-                <Comment id={this.props.posts.post._id} likes={this.props.posts.post.likes} comments={this.props.posts.post.comments} more={true}/>
-              
+                <Comment id={this.props.posts.post._id} post={this.props.posts.post} likes={this.props.posts.post.likes} comments={this.props.posts.post.comments} more={true}/>
               <div className="chip-div">
                 {this.props.posts.post.tags.map(data => {
                   return (

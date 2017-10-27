@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { topPosts } from '../../actions/posts';
-import List, { ListItem, ListItemIcon, ListItemText, ListSubheader } from 'material-ui/List';
+import List, { ListItem, ListItemText, ListSubheader } from 'material-ui/List';
 import { GridList, GridListTile, GridListTileBar } from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import OpenInNew from 'material-ui-icons/OpenInNew';
@@ -24,7 +24,7 @@ class Browse extends Component {
           {this.props.posts.users.map((user => {
             return (
               <Link to={`/user/${user.user[0]._id}`} >
-              <ListItem button>
+              <ListItem key={user.user[0]._id} button>
                 <ListItemText primary={user.user[0].username} />
               </ListItem>
               </Link>
@@ -38,7 +38,7 @@ class Browse extends Component {
           {this.props.posts.top.map((post) => {
             return (
               <GridListTile key={post._id}>
-                <img src={post.picture} />
+                <img alt={post.title} src={post.picture} />
                 <GridListTileBar
                   title={post.title}
                   subtitle={<span>by: {post.author[0].username}</span>}
@@ -55,13 +55,12 @@ class Browse extends Component {
             )
           })}
         </GridList>
-        
         <List>
           <ListSubheader>{`Most Used Tags`}</ListSubheader>
           {this.props.posts.tags.map((tag => {
             return (
               <Link to={`posts/tags/${tag._id.label}`}>
-                <ListItem button>
+                <ListItem key={tag._id.label} button>
                   <ListItemText primary={tag._id.label} />
                   <ListItemText secondary={tag.tags}/>
                 </ListItem>
@@ -69,8 +68,6 @@ class Browse extends Component {
             )
           }))}
         </List>
-      
-
       </div>
     )
   }

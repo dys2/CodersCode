@@ -20,16 +20,39 @@
   display: none;
 }
 
-.upload-label-post {
-  margin: 50px 15vw;
-}
-
 .chip-div {
   display: flex;
   flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+.upload-label-post {
+  width: 40px;
+  padding: 0 !important;
+}
+
+.upload-btn-div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0;
 }
 
 .new-post-submit {
+  margin: auto;
   margin-top: 20px;
+}
+.tag-chip {
+  margin: 0px 5px;
+}
 
+.tag-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.new-post-tags {
+  height: 30px;
 }

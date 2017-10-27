@@ -17,6 +17,7 @@ import './css/App.css';
 export default () => (
   <div className="app">
     <Route path="/" component={ButtonAppBar} />
+    <Route exact path="/" component={Posts} />
     <Route exact path='/posts/tags/:tag' component={PostsByTags} />
     <Route path='/browse' component={Auth(Browse, SignInPage)} />
     <Route path='/newpost' component={Auth(NewPost, SignInPage)} />
