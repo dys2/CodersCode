@@ -109,7 +109,7 @@ export default class CreateAccount extends Component {
             label="Confirm Password"
             type="password"
           />
-          <button type="submit">Create Account</button>
+          <button className="account-submit-btn" type="submit">Create Account</button>
           <div className={this.props.auth.isFetching ? "log-in-progress" : "hide"}>
               <CircularProgress  size={30} />
             </div>

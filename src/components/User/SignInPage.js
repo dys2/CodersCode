@@ -3,7 +3,6 @@ import TextField from 'material-ui/TextField';
 import { CircularProgress } from 'material-ui/Progress';
 import Snackbar from 'material-ui/Snackbar';
 import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
 import './css/SignInPage.css';
 
 
