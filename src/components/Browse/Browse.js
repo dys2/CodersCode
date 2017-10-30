@@ -60,9 +60,8 @@ class Browse extends Component {
           {this.props.posts.tags.map((tag => {
             return (
               <Link to={`posts/tags/${tag._id.label}`}>
-                <ListItem key={tag._id.label} button>
+                <ListItem className="tag-item-list" key={tag._id.label} button>
                   <ListItemText primary={tag._id.label} />
-                  <ListItemText secondary={tag.tags}/>
                 </ListItem>
               </Link>
             )
