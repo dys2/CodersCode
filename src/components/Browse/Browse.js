@@ -21,7 +21,7 @@ class Browse extends Component {
       <div className="browse-container">
         <List>
           <ListSubheader>{`Most Active Users`}</ListSubheader>
-          {this.props.posts.users.map((user => {
+          {this.props.posts.users.slice(0, 9).map((user => {
             return (
               <Link to={`/user/${user.user[0]._id}`} >
               <ListItem key={user.user[0]._id} button>
@@ -35,7 +35,7 @@ class Browse extends Component {
           <GridListTile key="subheader" rows={.4} cols={2}>
             <Subheader>Top Posts</Subheader>
           </GridListTile>
-          {this.props.posts.top.map((post) => {
+          {this.props.posts.top.slice(0, 11).map((post) => {
             return (
               <GridListTile key={post._id}>
                 <img alt={post.title} src={post.picture} />
@@ -57,7 +57,7 @@ class Browse extends Component {
         </GridList>
         <List>
           <ListSubheader>{`Most Used Tags`}</ListSubheader>
-          {this.props.posts.tags.map((tag => {
+          {this.props.posts.tags.slice(0, 9).map((tag => {
             return (
               <Link to={`posts/tags/${tag._id.label}`}>
                 <ListItem className="tag-item-list" key={tag._id.label} button>

@@ -32,7 +32,7 @@ class IndPost extends Component {
           </Link>}/>
             <CardMedia className="post-image" title="image" ref={node => this.image = node} image={this.props.posts.post.picture} />
               <CardContent className="card-content">
-                <Typography component="p" className="post-para">
+                <Typography gutterBottom component="pre" noWrap className="post-para">
                   {this.props.posts.post.content}
                 </Typography>
                 <Comment id={this.props.posts.post._id} post={this.props.posts.post} likes={this.props.posts.post.likes} comments={this.props.posts.post.comments} more={true}/>

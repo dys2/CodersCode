@@ -24,6 +24,8 @@
 
 .post-para {
   padding: 0 14px !important;
+  white-space: pre-wrap !important;
+  margin: 10px auto !important;
 }
 
 .chip-div {

@@ -27,7 +27,7 @@ export default class Post extends Component {
           </Link>} />
         <CardMedia className="post-image" title="image" image={this.props.post.picture} />
         <CardContent className="card-content">
-          <Typography component="p" className="post-para">
+          <Typography component="pre" gutterBottom className="post-para">
             {this.props.post.content}
           </Typography>
           <Comment id={this.props.post._id} post={this.props.post} likes={this.props.post.likes} comments={this.props.post.comments}/>

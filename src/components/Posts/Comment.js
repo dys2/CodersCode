@@ -67,7 +67,7 @@ class Comment extends Component {
           {this.props.comments.sort((a, b) => b.likes.length - a.likes.length).slice(0, this.state.num).map((comment) => {
             return (
               <div className="comment-row">
-                <div classname="comment-text" >
+                <div >
                 <Typography className="comment-author">{`${comment.author.username}:`}</Typography>
                 <Typography className="comment">{comment.text}</Typography>
                 </div>
