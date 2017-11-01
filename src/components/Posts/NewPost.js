@@ -29,6 +29,7 @@ export default class NewPost extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if (!this.state.picture) return this.setState({ error: 'Dont forget to include a picture!!' });
     const newPost = {
       title: this.state.title,
       author: this.props.auth.user._id,
