@@ -15,16 +15,17 @@ const RequireAuth = Auth(AuthAppBar, UnAuthAppBar);
 
 class ButtonAppBar extends React.Component {
   render() {
+    console.log(window.innerWidth);
     return (
       <div className="menu-bar" >
         <AppBar position="fixed" className="app-bar" >
           <Toolbar className="tool-bar" >
             <MenuBtn history={this.props.history} />
-            <div className="appbar-div-mid">
+            <div style={window.innerWidth < 400 ? {  paddingLeft: 0 } : { paddingLeft: 30}} className="appbar-div-mid">
               <Typography type="title" color="inherit" >
                 The Coders Code
               </Typography>
-              <img 
+              <img
                 alt="top bar header"
                 className="appbar-right-img"
                 src='http://www.sfbaysuperbowl.com/wp-content/themes/superbowl50/images/footer/2x/skyline.png'
