@@ -52,6 +52,7 @@ class Profile extends Component {
   handleDelete(e) {
     e.preventDefault();
     this.props.deletePost(this.state.deleteId);
+    this.props.getUsersPosts(this.props.auth.user._id);
     this.setState({ dialog: false, deleteId: '' });
   }
   render() {
