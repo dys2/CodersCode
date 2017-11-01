@@ -107,10 +107,10 @@ export const removePostLike = (data) => async (dispatch) => {
   }
 }
 
-export const deletePost = (id) => async (dispatch) => {
+export const deletePost = (id, user) => async (dispatch) => {
   try {
     const res = await axios.delete(`https://coders-api.herokuapp.com/post/${id}`, { headers: { 'authorization': localStorage.getItem('token') }});
-    if (res.status === 200) dispatch(getUsersPosts());
+    if (res.status === 200) dispatch(getUsersPosts(user));
   } catch(err) {
     err.message === 'Request failed with status code 401' ? dispatch(postError('Must log in before completing action')) : dispatch(postError('Could not complete action'));
     setTimeout(() => dispatch({ type: CLEAR_POST_ERROR }), 2000);

@@ -51,8 +51,7 @@ class Profile extends Component {
   }
   handleDelete(e) {
     e.preventDefault();
-    this.props.deletePost(this.state.deleteId);
-    this.props.getUsersPosts(this.props.auth.user._id);
+    this.props.deletePost(this.state.deleteId, this.props.auth.user._id);
     this.setState({ dialog: false, deleteId: '' });
   }
   render() {
@@ -75,7 +74,7 @@ class Profile extends Component {
         {this.props.posts.posts && this.props.posts.posts.length > 0 ?
           this.props.posts.posts.map((post) => {
           return (
-            <Collapse in={this.state.open} transitionDuration="auto" unmountOnExit className="posts-list">
+            <Collapse in={this.state.open} key={post._id} transitionDuration="auto" unmountOnExit className="posts-list">
             <Link to={{
               pathname: `/posts/${post._id}`,
               state: this.props.posts
