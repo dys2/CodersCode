@@ -12,7 +12,7 @@ class Posts extends Component {
   render() {
     return (
       <div className="posts-container">
-        {this.props.posts.posts ? this.props.posts.posts.map(post => <Post post={post} addComment={this.props.addComment} key={post._id}/>) : ''}
+        {this.props.posts.posts ? this.props.posts.posts.reverse().map(post => <Post post={post} addComment={this.props.addComment} key={post._id}/>) : ''}
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
