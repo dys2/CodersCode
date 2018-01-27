@@ -15,7 +15,6 @@ const RequireAuth = Auth(AuthAppBar, UnAuthAppBar);
 
 class ButtonAppBar extends React.Component {
   render() {
-    console.log(window.innerWidth);
     return (
       <div className="menu-bar" >
         <AppBar position="fixed" className="app-bar" >
